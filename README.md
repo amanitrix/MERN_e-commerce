@@ -17,9 +17,10 @@ npm install</code></pre>
 
   <h2>4️⃣ Configure Environment Variables</h2>
   <p>In the existing <code>.env</code> file inside the <code>backend</code> folder, add the following:</p>
-  <pre><code>EMAIL=your_email_here
+  <pre><code>MONGO_URI=your_mongodb_connection_url
+EMAIL=your_email_here
 PASSWORD=your_email_password_here
-MONGO_URI=your_mongodb_connection_url</code></pre>
+</code></pre>
   <blockquote>Replace these with your actual email credentials and MongoDB URI.</blockquote>
 
   <h2>5️⃣ Run the Project</h2>
