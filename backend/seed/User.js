@@ -7,7 +7,7 @@ const users = [
     email: "demo@gmail.com",
     password:'$2a$10$GH8p5cAsGFEdYsLaSfTQ3e1eUs7KbLmVBltjbX4DDCj2eyO2KW/Ze',
     isVerified: true,
-    isAdmin: false,
+    isAdmin: true,
     __v: 0,
   },
   {

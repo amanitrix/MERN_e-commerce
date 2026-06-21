@@ -1,6 +1,7 @@
 require('dotenv').config()
 const jwt=require('jsonwebtoken')
 const { sanitizeUser } = require('../utils/SanitizeUser')
+const User=require('../models/User')
 
 exports.verifyToken=async(req,res,next)=>{
     try {
@@ -39,5 +40,30 @@ exports.verifyToken=async(req,res,next)=>{
         else {
             return res.status(500).json({ message: "Internal Server Error" });
         }
+    }
+}
+
+exports.verifyAdmin=async(req,res,next)=>{
+    try {
+        // verifyToken must run first and attach the logged-in user to the request
+        if(!req.user || !req.user._id){
+            return res.status(401).json({message:"Please login to continue"})
+        }
+
+        // Read the current role from the database instead of trusting an old token.
+        const user=await User.findById(req.user._id).select('isAdmin')
+
+        if(!user){
+            return res.status(401).json({message:"User not found, please login again"})
+        }
+
+        if(!user.isAdmin){
+            return res.status(403).json({message:"Admin access required"})
+        }
+
+        next()
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:"Internal Server Error"})
     }
 }
